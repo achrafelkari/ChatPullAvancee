@@ -1,0 +1,27 @@
+module chatmodule{
+  	struct Message{
+       string from;
+       string to;
+       string message;
+     };
+     struct Client{
+     	string nickName;
+     };
+ 	 typedef sequence<Message> Messages;
+     struct Dialog {
+     	Client client;
+     	Messages messagesClient;
+     };
+     typedef sequence<Dialog> Dialogues;
+     typedef sequence<Client> Clients; 
+    interface Dialogue{
+        attribute Dialog dialogue;
+		Clients getClients();
+		void sendMessage(in string to,in string message);
+		Messages getMessages(in string pseudo);
+		};
+	interface Connection{
+	   	Dialogue connect(in string nickname);
+		void disconnect(in string nickname);
+		};
+	};
